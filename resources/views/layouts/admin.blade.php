@@ -30,10 +30,9 @@
 <!-- Sidebar Navigation -->
 <div class="navigation">
     <ul>
-        <li>
+         <li>
             <a href="#">
-                <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
-                <span class="title">Shop</span>
+                <img src="{{ asset('img/logo.jpg') }}" alt="Mobile Shop Logo" class="logo" style="width: 280px; height: 100px;">
             </a>
         </li>
 
@@ -81,9 +80,6 @@
                 <span class="title">Profits</span>
             </a>
         </li>
-
-
-           
 
 
         <li>

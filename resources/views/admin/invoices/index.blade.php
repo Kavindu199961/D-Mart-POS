@@ -32,9 +32,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Invoice Number</th>
-                            <th>Cashier Name</th>
                             <th>Customer Name</th>
                             <th>Total (LKR)</th>
+                            <th>Cashier Name</th>
+                            <th>Date & Time</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -42,9 +43,10 @@
                         @foreach($sales as $sale)
                             <tr>
                                 <td>{{ $sale->invoice_number }}</td>
-                                <td>{{ $sale->cashier_name }}</td>
                                 <td>{{ $sale->customer_name }}</td>
                                 <td>{{ number_format($sale->total, 2) }}</td>
+                                <td>{{ $sale->cashier_name }}</td>
+                                <td>{{ $sale->created_at }}</td>
                                 <td class="text-center">
                                     <a href="{{ url('/admin/invoices/' . $sale->id) }}" class="btn btn-info btn-sm mb-2" data-toggle="tooltip" title="View Bill">
                                         <i class="fas fa-eye"></i> View Bill

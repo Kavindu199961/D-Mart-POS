@@ -43,7 +43,8 @@ class BillingController extends Controller
             'items.*.item_name' => 'required|string', // Validate item_name
             'items.*.product_code' => 'required|string', // Validate product_code
             'items.*.sale_price' => 'required|numeric', // Validate sale_price
-            'items.*.quantity' => 'required|integer|min:1', // Validate quantity
+            'items.*.quantity' => 'required|integer|min:1',
+            'items.*.warranty' => 'nullable|string', // Validate quantity
         ]);
 
         // Fetch and increment the invoice number
@@ -111,13 +112,14 @@ class BillingController extends Controller
             'sale' => $sale,
             'customer_name' => $validated['customer_name'],
             'phone_number' => $validated['phone_number'],
+            'cashier_name' => $validated['cashier_name'], // Add this line
             'date_time' => $dateTime
         ]);
 
         // Set the paper size to A5 (half of A4)
         $pdf->setPaper([0, 0, 595.28, 421.26]);
 
-        return $pdf->stream($invoiceNumber . '.pdf');
+        return $pdf->stream($sale->invoice_number . '.pdf');
 
     } catch (\Exception $e) {
         // Log the error and return a JSON response

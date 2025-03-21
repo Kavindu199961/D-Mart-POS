@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Sale;
 
+use App\Models\Sale;
 use Illuminate\Http\Request;
+use PDF; // Use the correct facade
 
 class SaleController extends Controller
 {
@@ -26,6 +27,14 @@ class SaleController extends Controller
     {
         $sale = Sale::findOrFail($id); // Find sale by ID
         return view('admin.invoices.bill', compact('sale'));
+    }
+
+    public function downloadInvoice($id)
+    {
+        $sale = Sale::findOrFail($id);
+        $pdf = PDF::loadView('admin.invoices.bill', compact('sale')); // Corrected view path
+        $pdf->setPaper([0, 0, 595.28, 421.26]);
+        return $pdf->download($sale->invoice_number . '.pdf');
     }
 
     public function destroy($id)

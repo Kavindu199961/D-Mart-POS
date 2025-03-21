@@ -78,12 +78,15 @@
             <div class='header'>
                 <table style='width: 100%; border: none; table-layout: fixed;'>
                     <tr>
+                    <td style='width: 15%; text-align: left;'>
+                        <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents(public_path('img/logo.jpg'))) }}" alt="Mobile Shop Logo" class="logo" style='width: 135px; height: auto;'></td>
+                        </td>
                         
                         <td style='width: 160%; text-align: center;'>
-                            <h1 style='margin: 0; font-size: 18px;'>CE LAPTOP REPAIR CENTER</h1>
-                            <p style='margin: 5px 0; font-size: 10px;'>Dealers in Desktop Computers, Laptop Accessories, Repairs Service & import wholesale and retail</p>
-                            <p style='margin: 5px 0; font-size: 10px;'>254/1/1/6, Baladaksha Mawatha, New Sathipola Road, Mawanella, Sri Lanka</p>
-                            <p style='margin: 5px 0; font-size: 10px;'><strong>| Hotline: 0756502913 | Email : chammikaelectronic@gmail.com |</strong></p>
+                            <h1 style='margin: 0; font-size: 18px;'>D-MART MOBILE SHOP</h1>
+                            <p style='margin: 5px 0; font-size: 10px;'>Dealers in Mobile Phones, Mobile Accessories, Repairs Service & import wholesale and retail</p>
+                            <p style='margin: 5px 0; font-size: 10px;'>Rambukkana Road, Hiriwadunna, Sri Lanka</p>
+                            <p style='margin: 5px 0; font-size: 10px;'><strong>| Hotline: 0763471705 | Email : chammikaelectronic@gmail.com |</strong></p>
                         </td>
                     </tr>
                 </table>
@@ -100,7 +103,7 @@
                         <div class='section'>
                             <p><strong>Invoice No:</strong> {{ $sale->invoice_number }}</p>
                             <p><strong>Issue Date:</strong> {{ $date_time ?? 'N/A' }}</p>
-                            <p><strong>Sales Rep:</strong> kavi</p>
+                            <p><strong>Sales Rep:</strong> {{ $cashier_name ?? 'N/A' }}</p>
                             <p><strong>Payment Method:</strong> Cash</p>
                         </div>
                     </td>
@@ -126,7 +129,7 @@
                                 $item = $items[$i];
                                 echo '<tr>
                                     <td>' . $item['item_name'] . '</td>
-                                    <td>' . (!empty($item['warranty']) ? $item['warranty'] : 'N/A') . '</td>
+                                    <td>' . (!empty($item['warranty']) ? $item['warranty'] : '-----') . '</td>
                                     <td>' . $item['quantity'] . '</td>
                                     <td>' . number_format($item['sale_price'], 2) . '</td>
                                     <td class="text-right">' . number_format($item['sale_price'] * $item['quantity'], 2) . '</td>
@@ -155,7 +158,7 @@
             </tfoot>
         </table>
                     <div style='text-align: center; margin-top: 1px;'>
-                <p style='margin: 0; font-size: 9px;'>Thank You For Choosing Us</p>
+                <p style='margin: 0; font-size: 9px;'>Visit us n enjoy your shopping experience</p>
                 <p style='margin: 0; font-size: 9px; text-align: left;'>* Warranty for 1 Year Less 21 Working Days for computer hardware.</p>
                 <p style='margin: 0; font-size: 9px; text-align: left;'>* No Warranty for Bum Marks, Scratches, Physical damages and any other damage happened by user activities.</p>
                 <p style='margin: 0; font-size: 9px; text-align: left;'>* Goods sold once can't return.</p>
