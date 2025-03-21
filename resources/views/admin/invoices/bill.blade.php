@@ -2,6 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        function downloadPDF() {
+            const link = document.createElement('a');
+            link.href = "{{ route('download.invoice', ['invoiceNumber' => $sale->invoice_number]) }}";
+            link.download = "{{ $sale->invoice_number }}.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
     <title>Invoice</title>
     <style>
         body {
@@ -71,6 +81,9 @@
         .text-right {
             text-align: right;
         }
+
+        /* Hide the download button when printing or generating PDF */
+       
     </style>
 </head>
 <body>
@@ -187,9 +200,10 @@
         <!-- Website URL -->
         <p style="text-align: center; margin-top: -20px;">www.chammikaelectronic.lk</p>
     </div>
+
+    @if(isset($show_download_button) && $show_download_button)
+        <button onclick="downloadPDF()">Download PDF</button>
+    @endif
 </body>
 </html>
 
-<div>
-<a href="{{ route('sales.downloadInvoice', $sale->id) }}" class="btn btn-primary" style="display: block; text-align: center; margin-top: 20px;">Download PDF</a>
-</div>
