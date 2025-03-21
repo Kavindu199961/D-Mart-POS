@@ -161,7 +161,7 @@
             </tfoot>
         </table>
                     <div style='text-align: center; margin-top: 1px;'>
-                <p style='margin: 0; font-size: 11px;'>Visit us n enjoy your shopping experience</p>
+                <p style='margin: 0; font-size: 11px;'>Come back and enjoy your shopping experience</p>
                 <!-- <p style='margin: 0; font-size: 9px; text-align: left;'>* Warranty for 1 Year Less 21 Working Days for computer hardware.</p>
                 <p style='margin: 0; font-size: 9px; text-align: left;'>* No Warranty for Bum Marks, Scratches, Physical damages and any other damage happened by user activities.</p>
                 <p style='margin: 0; font-size: 9px; text-align: left;'>* Goods sold once can't return.</p> -->
