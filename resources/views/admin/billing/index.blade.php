@@ -203,16 +203,11 @@
                 return response.blob(); // Get the PDF file as a blob
             })
             .then(blob => {
-                // Create a temporary URL for the blob
                 let url = window.URL.createObjectURL(blob);
-                let a = document.createElement("a");
-                a.style.display = "none";
-                a.href = url;
-                a.download = "invoice.pdf"; // Set the file name for download
-                document.body.appendChild(a);
-                a.click(); // Trigger the download
-                window.URL.revokeObjectURL(url); // Clean up the URL object
+                window.open(url, '_blank'); // Open the PDF in a new tab
             })
+
+
             .catch(error => {
                 console.error('Error:', error);
                 alert(error.message); // Show error message to the user

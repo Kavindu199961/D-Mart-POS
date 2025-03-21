@@ -70,7 +70,7 @@
 
     <h3 class="mt-4 text-center">All Expenses</h3>
     <div class="table-responsive">
-        <table class="table table-hover mt-3 shadow-sm">
+        <table class="table w-100">
             <thead class="bg-dark text-white">
                 <tr>
                     <th>Amount (LKR)</th>

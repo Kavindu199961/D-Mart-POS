@@ -114,7 +114,10 @@ class BillingController extends Controller
             'date_time' => $dateTime
         ]);
 
-        return $pdf->download($invoiceNumber . '.pdf');
+        // Set the paper size to A5 (half of A4)
+        $pdf->setPaper([0, 0, 595.28, 421.26]);
+
+        return $pdf->stream($invoiceNumber . '.pdf');
 
     } catch (\Exception $e) {
         // Log the error and return a JSON response
