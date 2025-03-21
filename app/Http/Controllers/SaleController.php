@@ -29,27 +29,13 @@ class SaleController extends Controller
         return view('admin.invoices.bill', compact('sale'));
     }
 
-    public function downloadInvoice($invoiceNumber)
-{
-    // Fetch the sale record
-    $sale = Sale::where('invoice_number', $invoiceNumber)->firstOrFail();
-
-    // Generate the PDF
-    $pdf = Pdf::loadView('admin.invoices.bill', [
-        'sale' => $sale,
-        'customer_name' => $sale->customer_name,
-        'phone_number' => $sale->phone_number,
-        'cashier_name' => $sale->cashier_name,
-        'date_time' => $sale->created_at->format('Y-m-d H:i:s'),
-        'show_download_button' => false,
-    ]);
-
-    // Set the paper size to A5
-    $pdf->setPaper([0, 0, 595.28, 421.26]);
-
-    // Download the PDF
-    return $pdf->download($invoiceNumber . '.pdf');
-}
+    public function downloadInvoice($id)
+    {
+        $sale = Sale::findOrFail($id);
+        $pdf = Pdf::loadView('admin.invoices.printbill', compact('sale'));
+        $pdf->setPaper([0, 0, 595.28, 421.26]);
+        return $pdf->download($sale->invoice_number . '.pdf');
+    }
     public function destroy($id)
     {
         $sale = Sale::findOrFail($id); // Find the sale by ID or fail

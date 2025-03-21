@@ -52,6 +52,10 @@
                                         <i class="fas fa-eye"></i> View Bill
                                     </a>
 
+                                    <a href="{{ route('sales.downloadInvoice', $sale->id) }}" class="btn btn-primary btn-sm mb-2" data-toggle="tooltip" title="Download PDF">
+                                        <i class="fas fa-file-pdf"></i> Download
+                                    </a>
+
                                     <!-- Delete Button -->
                                     <form action="{{ route('admin.invoices.destroy', $sale->id) }}" method="POST" style="display:inline-block;">
                                         @csrf
@@ -64,6 +68,7 @@
                             </tr>
                         @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>

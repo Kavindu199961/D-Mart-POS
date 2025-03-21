@@ -98,15 +98,15 @@
                 <tr>
                     <td>
                         <div class='details'>
-                            <p><strong>Invoice To:</strong> {{ $customer_name ?? 'N/A' }}</p>
-                            <p><strong>Phone Number:</strong> {{ $phone_number ?? 'N/A' }}</p>
+                            <p><strong>Invoice To:</strong> {{ $sale->customer_name }}<</p>
+                            <p><strong>Phone Number:</strong> {{ $sale->phone_number }}</p>
                         </div>
                     </td>
                     <td>
                         <div class='section'>
                             <p><strong>Invoice No:</strong> {{ $sale->invoice_number }}</p>
-                            <p><strong>Issue Date:</strong> {{ $date_time ?? 'N/A' }}</p>
-                            <p><strong>Sales Rep:</strong> {{ $cashier_name ?? 'N/A' }}</p>
+                            <p><strong>Issue Date:</strong> {{ $sale->created_at }}</p>
+                            <p><strong>Sales Rep:</strong> {{ $sale->cashier_name }}</p>
                             <p><strong>Payment Method:</strong> Cash</p>
                         </div>
                     </td>

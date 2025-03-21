@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2025 at 12:30 PM
+-- Generation Time: Mar 21, 2025 at 06:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `email`, `password`, `created_at`, `updated_at`, `role`) VALUES
-(1, 'admin@dmart.com', '$2y$12$DdsjC69dMAwnmT2pkpWFkOwvzRsmJgD7m1yGEMBqW633Vns3ZdJZ2', '2025-03-19 05:03:38', '2025-03-19 05:03:38', 'admin');
+(1, 'admin@dmart.com', '$2y$12$DdsjC69dMAwnmT2pkpWFkOwvzRsmJgD7m1yGEMBqW633Vns3ZdJZ2', '2025-03-19 05:03:38', '2025-03-19 05:03:38', 'admin'),
+(3, 'admin123@dmart.com', '$2y$12$nH3rRxlF2WHDAN6j.95h.OkZJV18DFXBfGp5LtmuphviQ8v/bFq16', '2025-03-21 09:28:00', '2025-03-21 09:28:00', 'admin');
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,8 @@ CREATE TABLE `daily_sales_summaries` (
 --
 
 INSERT INTO `daily_sales_summaries` (`id`, `date`, `total_sales`, `total_profit`, `created_at`, `updated_at`) VALUES
-(3, '2025-03-20', 16000.00, 7000.00, '2025-03-20 10:44:25', '2025-03-20 10:52:11');
+(3, '2025-03-20', 16000.00, 7000.00, '2025-03-20 10:44:25', '2025-03-20 10:52:11'),
+(4, '2025-03-21', 465300.00, 207300.00, '2025-03-21 03:27:54', '2025-03-21 16:09:14');
 
 -- --------------------------------------------------------
 
@@ -108,7 +110,8 @@ CREATE TABLE `expensives` (
 --
 
 INSERT INTO `expensives` (`id`, `amount`, `reason`, `created_at`, `updated_at`) VALUES
-(1, 500.00, 'new', '2025-03-20 08:41:07', '2025-03-20 08:41:07');
+(1, 500.00, 'new', '2025-03-20 08:41:07', '2025-03-20 08:41:07'),
+(2, 1000.00, 'for lunch', '2025-03-21 10:40:16', '2025-03-21 10:40:16');
 
 -- --------------------------------------------------------
 
@@ -144,7 +147,7 @@ CREATE TABLE `invoice_sequences` (
 --
 
 INSERT INTO `invoice_sequences` (`id`, `last_invoice_number`, `created_at`, `updated_at`) VALUES
-(1, 'INV-127', '2025-03-20 05:27:42', '2025-03-20 10:52:11');
+(1, 'INV-210', '2025-03-20 05:27:42', '2025-03-21 16:09:14');
 
 -- --------------------------------------------------------
 
@@ -246,9 +249,9 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id`, `invoice_number`, `cashier_name`, `items`, `total`, `created_at`, `updated_at`, `customer_name`, `phone_number`) VALUES
-(28, 'INV-125', 'Deshan', '\"[{\\\"item_name\\\":\\\"mouse\\\",\\\"product_code\\\":\\\"DMT-0001\\\",\\\"sale_price\\\":2000,\\\"quantity\\\":1}]\"', 2000.00, '2025-03-20 10:44:25', '2025-03-20 10:44:25', 'Kavindu Nelshan', '0765645303'),
-(29, 'INV-126', 'Jane Smith', '\"[{\\\"item_name\\\":\\\"Keyboard\\\",\\\"product_code\\\":\\\"DMT-0002\\\",\\\"sale_price\\\":6000,\\\"quantity\\\":1}]\"', 6000.00, '2025-03-20 10:45:22', '2025-03-20 10:45:22', 'Kavindu Nelshan', '0765645303'),
-(30, 'INV-127', 'Deshan', '\"[{\\\"item_name\\\":\\\"Headset\\\",\\\"product_code\\\":\\\"DMT-0003\\\",\\\"sale_price\\\":8000,\\\"quantity\\\":1}]\"', 8000.00, '2025-03-20 10:52:11', '2025-03-20 10:52:11', 'Kavindu Nelshan', '0765645303');
+(91, 'INV-191', 'Deshan', '\"[{\\\"item_name\\\":\\\"Headset\\\",\\\"product_code\\\":\\\"DMT-0003\\\",\\\"sale_price\\\":7000,\\\"quantity\\\":1,\\\"warranty\\\":\\\"6 month\\\"},{\\\"item_name\\\":\\\"Keyboard\\\",\\\"product_code\\\":\\\"DMT-0002\\\",\\\"sale_price\\\":5500,\\\"quantity\\\":1,\\\"warranty\\\":\\\"3 month\\\"}]\"', 12500.00, '2025-03-21 10:50:44', '2025-03-21 10:50:44', 'Kavindu Nelshan', '0765645303'),
+(108, 'INV-209', 'Deshan', '\"[{\\\"item_name\\\":\\\"Headset\\\",\\\"product_code\\\":\\\"DMT-0003\\\",\\\"sale_price\\\":8000,\\\"quantity\\\":1,\\\"warranty\\\":null}]\"', 8000.00, '2025-03-21 16:08:38', '2025-03-21 16:08:38', 'Kavindu Nelshan', '-'),
+(109, 'INV-210', 'Deshan', '\"[{\\\"item_name\\\":\\\"Headset\\\",\\\"product_code\\\":\\\"DMT-0003\\\",\\\"sale_price\\\":8000,\\\"quantity\\\":1,\\\"warranty\\\":null}]\"', 8000.00, '2025-03-21 16:09:14', '2025-03-21 16:09:14', 'Kavindu Nelshan', '-');
 
 -- --------------------------------------------------------
 
@@ -270,7 +273,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('sPM8qFqUJ3lxjTpbmMffrhDyBKzGM9Y7t8VlGajI', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiend1Z2hZbmZZak5maW1IRENMUUlWclBMMlZ0RUJUdlJBTDhiWk5UdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9wcm9maXRzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NDoiY2FydCI7YToxOntpOjI7YTo2OntzOjQ6Im5hbWUiO3M6MzoieXl5IjtzOjExOiJkZXNjcmlwdGlvbiI7czozOiJlZWUiO3M6MTI6InByb2R1Y3RfY29kZSI7czo4OiJETVQtMDAwMSI7czo4OiJxdWFudGl0eSI7czoxOiIxIjtzOjEzOiJzZWxsaW5nX3ByaWNlIjtzOjc6IjMwMDAuMDAiO3M6NToidG90YWwiO2Q6MzAwMDt9fX0=', 1742470162);
+('IVIN3J0XMJeI2pA80Lz63CbWAGIsKeopbQs5A1Oc', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRlR2U3RzT051U3BwSjVmbU9GT1NiS3JVSmUxQW9xdVh0YTEzZHl5NCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9pbnZvaWNlcy85MSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1742576487);
 
 -- --------------------------------------------------------
 
@@ -296,10 +299,10 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id`, `item_name`, `description`, `product_code`, `quantity`, `cost_price`, `sale_price`, `vendor_name`, `created_at`, `updated_at`) VALUES
-(2, 'mouse', 'eee', 'DMT-0001', 11, 1000.00, 2000.00, NULL, '2025-03-19 06:18:39', '2025-03-20 10:44:25'),
-(3, 'Keyboard', 'rrr', 'DMT-0002', 46, 3500.00, 6000.00, NULL, '2025-03-19 06:27:26', '2025-03-20 10:45:22'),
-(4, 'Headset', 'ttt', 'DMT-0003', 48, 4500.00, 8000.00, NULL, '2025-03-19 06:27:37', '2025-03-20 10:52:11'),
-(5, 'I phone 15 back cover red', 'dd', 'DMT-0004', 20, 800.00, 2000.00, 'kavi', '2025-03-19 08:00:01', '2025-03-20 10:42:36');
+(2, 'mouse', 'eee', 'DMT-0001', 42, 1000.00, 2000.00, NULL, '2025-03-19 06:18:39', '2025-03-21 06:50:14'),
+(3, 'Keyboard', 'rrr', 'DMT-0002', 17, 3500.00, 6000.00, NULL, '2025-03-19 06:27:26', '2025-03-21 15:41:45'),
+(4, 'Headset', 'ttt', 'DMT-0003', 20, 4500.00, 8000.00, NULL, '2025-03-19 06:27:37', '2025-03-21 16:09:14'),
+(5, 'I phone 15 back cover red', 'dd', 'DMT-0004', 0, 800.00, 2000.00, 'kavi', '2025-03-19 08:00:01', '2025-03-21 07:17:41');
 
 -- --------------------------------------------------------
 
@@ -429,19 +432,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `daily_sales_summaries`
 --
 ALTER TABLE `daily_sales_summaries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `expensives`
 --
 ALTER TABLE `expensives`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -471,7 +474,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `stocks`

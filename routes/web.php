@@ -50,11 +50,8 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/profits', [DailySalesSummaryController::class, 'index'])->name('admin.profits.index');
 
     Route::get('/daily-sales-summary/export', [DailySalesSummaryController::class, 'export'])->name('daily-sales-summary.export');
-
-    // Route::get('/sales/{id}/download', [SaleController::class, 'downloadInvoice'])->name('sales.downloadInvoice');
     
-    // routes/web.php
-    Route::get('/download-invoice/{invoiceNumber}', [SaleController::class, 'downloadInvoice'])->name('download.invoice');
+    Route::get('/sales/{id}/download', [SaleController::class, 'downloadInvoice'])->name('sales.downloadInvoice');
 
     
 });
