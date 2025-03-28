@@ -19,7 +19,7 @@ class SaleController extends Controller
                   ->orWhere('customer_name', 'like', '%' . $searchTerm . '%');
         }
 
-        $sales = $query->get();
+        $sales = $query->latest()->get();
         return view('admin.invoices.index', compact('sales'));
     }
 
