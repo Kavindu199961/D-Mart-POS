@@ -45,8 +45,9 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/report', [ReportController::class, 'index'])->name('report.index');
 
     Route::get('/expenses', [ExpensiveController::class, 'index']);
-    Route::post('/expenses', [ExpensiveController::class, 'store']);
-    
+
+    Route::post('/expenses', [ExpensiveController::class, 'store'])->name('expenses.store');
+
     Route::get('/admin/profits', [DailySalesSummaryController::class, 'index'])->name('admin.profits.index');
 
     Route::get('/daily-sales-summary/export', [DailySalesSummaryController::class, 'export'])->name('daily-sales-summary.export');
