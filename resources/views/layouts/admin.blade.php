@@ -91,9 +91,6 @@
                 @csrf
             </form>
         </li>
-
-
-        <!-- Dashboard Link -->
         
     </ul>
 </div>
@@ -103,6 +100,62 @@
     <div class="toggle">
         <ion-icon name="menu-outline"></ion-icon>
     </div>
+
+    <!-- Happy new year msg-->
+    
+    @if (now()->format('m') == 3) <!-- Check if the current month is April -->
+    <div class="new-year-animation text-center mt-4">
+        <h1 class="text-danger fw-bold new-year-title">
+            🎉 Happy New Year! 🎊
+        </h1>
+        <p class="text-secondary new-year-message">
+            Wishing you success and happiness. D-Mart! ✨
+        </p>
+    </div>
+
+    <style>
+        .new-year-animation {
+            position: relative;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out, bounce 1.5s infinite alternate;
+        }
+
+        .new-year-title {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #ff4757;
+        }
+
+        .new-year-message {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #57606f;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+@endif
+
+
 
     <main>
         <div class="container mt-4">

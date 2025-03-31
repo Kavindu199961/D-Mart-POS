@@ -36,7 +36,7 @@
                 </thead>
                 <tbody>
                     @foreach($stocks as $stock)
-                        <tr>
+                        <tr class="{{ $stock->quantity == 0 ? 'table-danger' : '' }}">
                             <td>{{ $stock->product_code }}</td>
                             <td>{{ $stock->item_name }}</td>
                             <td>{{ $stock->quantity }}</td>
@@ -60,6 +60,7 @@
                         </tr>
                     @endforeach
                 </tbody>
+
             </table>
         </div>
     </div>
