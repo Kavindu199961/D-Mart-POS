@@ -27,7 +27,16 @@ class StockController extends Controller
             'sale_price' => 'required|numeric',
         ]);
 
-        $product_code = 'DMT-' . str_pad(Stock::count() + 1, 4, '0', STR_PAD_LEFT);
+        $lastStock = Stock::latest('id')->first();
+
+    if ($lastStock && preg_match('/DMT-(\d+)/', $lastStock->product_code, $matches)) {
+        $nextNumber = intval($matches[1]) + 1;
+    } else {
+        $nextNumber = 1;
+    }
+
+    // Generate new unique product code
+    $product_code = 'DMT-' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
 
         Stock::create([
             'item_name' => $request->item_name,

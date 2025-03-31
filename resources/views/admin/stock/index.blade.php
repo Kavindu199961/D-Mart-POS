@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="container mt-4">
-<h1 class="mb-4 text-dark" style="font-size: 3rem; text-align: center;"><i class="bi bi-boxes"></i> Stock List</h1>
-
+    <h1 class="mb-4 text-dark" style="font-size: 3rem; text-align: center;">
+        <i class="bi bi-boxes"></i> Stock List
+    </h1>
 
     <a href="{{ route('stock.create') }}" class="btn btn-success mb-3">
         <i class="bi bi-plus-circle"></i> Add Stock
@@ -19,7 +20,7 @@
             </div>
         </div>
     </form>
-    
+
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table table-striped table-hover">
@@ -47,7 +48,17 @@
                                 <a href="{{ route('stock.edit', $stock->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
-                                
+
+                                <!-- View Description Button -->
+                                <button type="button" class="btn btn-info btn-sm view-desc-btn" 
+                                    data-bs-toggle="popover" 
+                                    data-bs-trigger="focus"
+                                    data-bs-placement="left"
+                                    title="Description"
+                                    data-bs-content="{{ $stock->description ?? 'No description available' }}">
+                                    <i class="bi bi-eye"></i> View Desc
+                                </button>
+
                                 <!-- Delete Form -->
                                 <form action="{{ route('stock.delete', $stock->id) }}" method="POST" class="d-inline">
                                     @csrf
@@ -60,11 +71,19 @@
                         </tr>
                     @endforeach
                 </tbody>
-
             </table>
         </div>
     </div>
 </div>
 
-@endsection
+<!-- Enable Bootstrap Popover -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl);
+        });
+    });
+</script>
 
+@endsection
