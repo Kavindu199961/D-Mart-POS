@@ -5,65 +5,107 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class Sale extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'invoice_number', 'cashier_name', 'customer_name', 'phone_number', 'items', 'total'
+        'invoice_number', 'cashier_name', 'customer_name', 'phone_number', 'items', 'total', 'total_cost'
     ];
 
     protected $casts = [
-        'items' => 'array', // Automatically convert JSON to an array
+        'items' => 'array',
     ];
 
-    // Get total sales for today
-    public static function getTodaysSalesTotal()
+    protected static function booted()
     {
-        return self::whereDate('created_at', Carbon::today())
-                    ->sum('total');
+        static::deleted(function ($sale) {
+            // Restock items when a sale is deleted
+            self::restockItems($sale->items);
+
+            // Update daily sales summary
+            self::updateDailySalesSummary($sale->created_at, true);
+        });
     }
 
-    // Get today's profit based on sales and stock cost price
-    public static function getTodaysProfit()
+    // Calculate total cost for a sale
+    public function calculateTotalCost()
     {
-        $todaysSales = self::whereDate('created_at', Carbon::today())->get();
-        $profit = 0;
+        $totalCost = 0;
+        $items = $this->items;
 
-        foreach ($todaysSales as $sale) {
-            // Check if 'items' is an array
-            $items = $sale->items;
-            if (is_array($items)) {
-                foreach ($items as $item) {
-                    // Assuming each item has 'id', 'price', and 'quantity' fields
-                    $stockItem = Stock::find($item['id']); 
-                    if ($stockItem) {
-                        $profit += ($item['price'] - $stockItem->cost_price) * $item['quantity'];
-                    }
-                }
-            } else {
-                // Log or handle error if items is not an array
-                \Log::error("Invalid 'items' data for Sale ID: {$sale->id}");
+        if (is_array($items)) {
+            foreach ($items as $item) {
+                $totalCost += ($item['cost_price'] ?? 0) * ($item['quantity'] ?? 1);
             }
         }
 
-        return $profit;
+        return $totalCost;
+    }
+
+    // Get total sales for a specific date
+    public static function getDateSalesTotal($date)
+    {
+        return self::whereDate('created_at', $date)->sum('total');
+    }
+
+    // Get total profit for a specific date
+    public static function getDateProfit($date)
+    {
+        return self::whereDate('created_at', $date)->sum('total') - 
+               self::whereDate('created_at', $date)->sum('total_cost');
+    }
+
+    // Get total cost for a specific date
+    public static function getDateTotalCost($date)
+    {
+        return self::whereDate('created_at', $date)->sum('total_cost');
     }
 
     // Update or create daily sales summary
-    public static function updateDailySalesSummary()
+    public static function updateDailySalesSummary($date, $isDeletion = false)
     {
-        $today = Carbon::today()->toDateString();
-        $totalSales = self::getTodaysSalesTotal();
-        $totalProfit = self::getTodaysProfit();
+        $date = Carbon::parse($date)->toDateString();
+        
+        $totalSales = self::getDateSalesTotal($date);
+        $totalCost = self::getDateTotalCost($date);
+        $totalProfit = $totalSales - $totalCost;
 
-        DailySalesSummary::updateOrCreate(
-            ['date' => $today],
-            [
-                'total_sales' => $totalSales,
-                'total_profit' => $totalProfit,
-            ]
-        );
+        if ($isDeletion) {
+            // Only update if record exists
+            $summary = DailySalesSummary::where('date', $date)->first();
+            if ($summary) {
+                $summary->update([
+                    'total_sales' => $totalSales,
+                    'total_cost' => $totalCost,
+                    'total_profit' => $totalProfit,
+                ]);
+            }
+        } else {
+            // Normal behavior - update or create
+            DailySalesSummary::updateOrCreate(
+                ['date' => $date],
+                [
+                    'total_sales' => $totalSales,
+                    'total_cost' => $totalCost,
+                    'total_profit' => $totalProfit,
+                ]
+            );
+        }
+    }
+
+    // Restock items after deleting an invoice
+    public static function restockItems($items)
+    {
+        if (is_array($items)) {
+            foreach ($items as $item) {
+                $stockItem = Stock::where('product_code', $item['product_code'])->first();
+                if ($stockItem) {
+                    $stockItem->increment('quantity', $item['quantity']);
+                }
+            }
+        }
     }
 }

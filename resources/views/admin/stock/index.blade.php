@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Stock')
+
 @section('content')
 <div class="container mt-4">
     <h1 class="mb-4 text-dark" style="font-size: 3rem; text-align: center;">

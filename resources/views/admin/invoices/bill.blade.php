@@ -34,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(json_decode($sale->items, true) as $item)
+                        @foreach($sale->items as $item) <!-- No json_decode() here -->
                         <tr>
                             <td>{{ $item['item_name'] }}</td>
                             <td>{{ !empty($item['warranty']) ? $item['warranty'] : '-----' }}</td>

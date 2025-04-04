@@ -88,7 +88,7 @@
                             <h1 style='margin: 0; font-size: 18px;'>D-MART MOBILE SHOP</h1>
                             <p style='margin: 5px 0; font-size: 10px;'>MOBILE PHONE REPAIR & ACCESSORIES</p>
                             <p style='margin: 5px 0; font-size: 10px;'>COMPUTER REPAIR & ACCESSORIES PHOTO COPY & PRINTOUT | RE-LOAD & ETC.</p>
-                            <p style='margin: 5px 0; font-size: 10px;'>RAMUKKANA ROAD, HIRIWADUNNA, SRI LANKA</p>
+                            <p style='margin: 5px 0; font-size: 10px;'>RAMBUKKANA ROAD, HIRIWADUNNA, SRI LANKA</p>
                             <p style='margin: 5px 0; font-size: 10px;'><strong>| Hotline: 076 3471705 | Email : dmart11259@gmail.com |</strong></p>
                         </td>
                     </tr>
@@ -124,34 +124,31 @@
             </thead>
             <tbody>
                 @php
-                    $items = json_decode($sale->items, true);
-                    if (json_last_error() === JSON_ERROR_NONE) {
-                        $itemCount = count($items);
-                        for ($i = 0; $i < 10; $i++) {
-                            if ($i < $itemCount) {
-                                $item = $items[$i];
-                                echo '<tr>
-                                    <td>' . $item['item_name'] . '</td>
-                                    <td>' . (!empty($item['warranty']) ? $item['warranty'] : '-----') . '</td>
-                                    <td>' . $item['quantity'] . '</td>
-                                    <td>' . number_format($item['sale_price'], 2) . '</td>
-                                    <td class="text-right">' . number_format($item['sale_price'] * $item['quantity'], 2) . '</td>
-                                </tr>';
-                            } else {
-                                echo '<tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>';
-                            }
+                    // Directly use $sale->items if it's already an array
+                    $itemCount = count($sale->items);
+                    for ($i = 0; $i < 10; $i++) {
+                        if ($i < $itemCount) {
+                            $item = $sale->items[$i];
+                            echo '<tr>
+                                <td>' . $item['item_name'] . '</td>
+                                <td>' . (!empty($item['warranty']) ? $item['warranty'] : '-----') . '</td>
+                                <td>' . $item['quantity'] . '</td>
+                                <td>' . number_format($item['sale_price'], 2) . '</td>
+                                <td class="text-right">' . number_format($item['sale_price'] * $item['quantity'], 2) . '</td>
+                            </tr>';
+                        } else {
+                            echo '<tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>';
                         }
-                    } else {
-                        echo '<tr><td colspan="5">Invalid items data</td></tr>';
                     }
                 @endphp
             </tbody>
+
             <tfoot>
                 <tr>
                     <td colspan='3'></td>

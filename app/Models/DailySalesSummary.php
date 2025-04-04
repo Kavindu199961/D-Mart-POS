@@ -15,5 +15,6 @@ class DailySalesSummary extends Model
         'date', // Add this line
         'total_sales',
         'total_profit',
+        'total_cost',
     ];
 }
