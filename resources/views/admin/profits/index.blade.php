@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Profits')
+
 @section('content')
 <div class="container mt-4">
     <div class="card shadow-lg border-0 rounded-4">
@@ -17,6 +19,7 @@
                             <th><i class="fas fa-calendar-alt"></i> Date</th>
                             <th><i class="fas fa-money-bill-wave"></i> Total Sales (LKR)</th>
                             <th><i class="fas fa-coins"></i> Total Profit (LKR)</th>
+                            <th><i class="fas fa-dollar-sign"></i> Total Cost (LKR)</th> <!-- New Column Header -->
                         </tr>
                     </thead>
                     <tbody class="table-light">
@@ -25,6 +28,7 @@
                                 <td><i class="fas fa-calendar-day"></i> {{ \Carbon\Carbon::parse($summary->date)->format('Y-m-d') }}</td>
                                 <td class="text-success fw-bold"><i class="fas fa-money-bill"></i> {{ number_format($summary->total_sales, 2) }}</td>
                                 <td class="text-primary fw-bold"><i class="fas fa-coins"></i> {{ number_format($summary->total_profit, 2) }}</td>
+                                <td class="text-danger fw-bold"><i class="fas fa-dollar-sign"></i> {{ number_format($summary->total_cost, 2) }}</td> <!-- New Column Data -->
                             </tr>
                         @endforeach
                     </tbody>

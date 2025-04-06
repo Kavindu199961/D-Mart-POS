@@ -43,4 +43,6 @@ class SaleController extends Controller
 
         return redirect()->route('invoices.index')->with('success', 'Invoice deleted successfully.');
     }
+
+
 }

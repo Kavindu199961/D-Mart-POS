@@ -8,6 +8,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpensiveController;
 use App\Http\Controllers\DailySalesSummaryController;
+use App\Http\Controllers\ItemReportController;
 
 // Show login page (GET request)
 Route::get('/login', [AdminController::class, 'login'])->name('login'); // Default login route
@@ -53,6 +54,8 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/daily-sales-summary/export', [DailySalesSummaryController::class, 'export'])->name('daily-sales-summary.export');
     
     Route::get('/sales/{id}/download', [SaleController::class, 'downloadInvoice'])->name('sales.downloadInvoice');
+
+    Route::get('/sales/item-report', [ItemReportController::class, 'index'])->name('admin.item_report.index');
 
     
 });

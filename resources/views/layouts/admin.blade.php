@@ -81,6 +81,16 @@
             </a>
         </li>
 
+        <li class="{{ Request::routeIs('admin.item_report.index') ? 'hovered' : '' }}">
+            <a href="{{ route('admin.item_report.index') }}" class="stock-link">
+                <span class="icon">
+                    <ion-icon name="stats-chart-outline"></ion-icon>
+                </span>
+                <span class="title">Item Sales</span>
+            </a>
+        </li>
+
+
 
         <li>
             <a href="{{ route('admin.logout') }}" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
