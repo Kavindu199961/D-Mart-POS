@@ -81,12 +81,31 @@
             </a>
         </li>
 
+        <li class="{{ Request::routeIs('admin.30days.index') ? 'hovered' : '' }}">
+            <a href="{{ route('admin.30days.index') }}" class="report-link">
+                <span class="icon">
+                    <ion-icon name="document-text-outline"></ion-icon> <!-- Icon for 30-Day Report -->
+                </span>
+                <span class="title">30-Day Report</span>
+            </a>
+        </li>
+
+
         <li class="{{ Request::routeIs('admin.item_report.index') ? 'hovered' : '' }}">
             <a href="{{ route('admin.item_report.index') }}" class="stock-link">
                 <span class="icon">
                     <ion-icon name="stats-chart-outline"></ion-icon>
                 </span>
                 <span class="title">Item Sales</span>
+            </a>
+        </li>
+
+        <li class="{{ Request::routeIs('admin.chat') ? 'hovered' : '' }}">
+            <a href="{{ route('admin.chat') }}" class="report-link">
+                <span class="icon">
+                    <ion-icon name="chatbubble-outline"></ion-icon> <!-- Icon for Chat -->
+                </span>
+                <span class="title">Chat</span>
             </a>
         </li>
 
@@ -174,9 +193,7 @@
             @yield('styles')
         </div>
     </main>
-    <footer class="text-center mt-4 p-3">
-        <small>Powered by <strong>CeylonGIT</strong></small>
-    </footer>
+    
 </div>
 
 <!-- JavaScript for Toggle Menu -->

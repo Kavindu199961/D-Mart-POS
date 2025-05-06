@@ -16,5 +16,6 @@ class DailySalesSummary extends Model
         'total_sales',
         'total_profit',
         'total_cost',
+        'summarized_at', // Add this line
     ];
 }

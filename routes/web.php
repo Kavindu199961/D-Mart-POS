@@ -9,6 +9,10 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpensiveController;
 use App\Http\Controllers\DailySalesSummaryController;
 use App\Http\Controllers\ItemReportController;
+use App\Http\Controllers\ThirtyDayReportController;
+use App\Http\Controllers\ChatController;
+
+
 
 // Show login page (GET request)
 Route::get('/login', [AdminController::class, 'login'])->name('login'); // Default login route
@@ -56,6 +60,19 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/sales/{id}/download', [SaleController::class, 'downloadInvoice'])->name('sales.downloadInvoice');
 
     Route::get('/sales/item-report', [ItemReportController::class, 'index'])->name('admin.item_report.index');
+
+    Route::get('/admin/30days', [ThirtyDayReportController::class, 'index'])->name('admin.30days.index');
+
+
+
+    Route::get('/chat', [ChatController::class, 'index'])->name('admin.chat');
+    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('admin.chat.send');
+
+
+
+
+
+
 
     
 });
